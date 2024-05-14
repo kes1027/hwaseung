@@ -16,6 +16,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 10;
 }
 
 #header nav {
@@ -67,9 +68,6 @@
 .visual {
   height: 108rem;
   background: skyblue;
-}
-
-.visual .inner {
   position: relative;
 }
 
@@ -82,6 +80,11 @@
   left: 0;
 }
 
+.visual .inner {
+  position: relative;
+  height: 100%;
+}
+
 .visual-con {
   position: absolute;
   top: 50%;
@@ -89,3 +92,119 @@
   transform: translateY(-50%);
   background: #55f;
 }
+
+.visual-con h2 {
+  font-weight: 700;
+  font-size: 7rem;
+  color: #fff;
+  /* 85(줄간격수치)/70(폰트사이즈)=1.2142 */
+  line-height: 1.2142;
+  letter-spacing: -0.25px; /* lts-.25px */
+}
+
+.visual-con a {
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #fff;
+}
+/* //e: visual */
+
+/* sec-title */
+.sec-title {
+  background: khaki;
+  font-weight: 700;
+  color: var(--title-color);
+}
+
+.sec-title h3 {
+  font-size: 2.4rem;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-end; /* aife */
+  background: #5f5;
+}
+
+.sec-title h3::after {
+  content: '';
+  display: block;
+  width: 13rem;
+  height: 1px;
+  background: #9c9c9c;
+  margin-bottom: 0.5rem;
+}
+
+.sec-title p {
+  font-size: 4.8rem;
+  line-height: 1.4;
+  margin-top: 4.5rem;
+}
+
+/* s: business */
+.business {
+  padding: 17rem 0 9rem;
+}
+.business-list {
+  display: flex;
+  margin-top: 7rem;
+}
+.business-list li {
+  border: 1px solid #000;
+  height: 37rem;
+
+  /* fxgsb ->flex grow shrink basis */
+  flex: 1 1 20%; /* fx1-1-20p */
+}
+
+.business-list li a {
+  display: flex;
+  flex-direction: column; /* fxdc */
+  justify-content: flex-end; /* jcfe */
+  align-items: center;
+  border: 1px solid #f00;
+  width: 100%;
+  height: 100%;
+  padding: 2.7rem;
+  font-weight: 600;
+  font-size: 2.6rem;
+  color: #fff;
+}
+/* //e: business */
+
+/* s: pr room */
+.pr {
+  padding: 8rem 0 10rem;
+}
+
+.pr-list {
+  display: flex;
+  gap: 2rem;
+  margin-top: 7rem;
+}
+.pr-list li {
+  border: 1px solid #000;
+  height: 50.2rem;
+  flex: 1 1 30%; /* 이 방법으로 가로 크기를 정해줄 경우, 가로 크기에 대한 정의는 하면 안된다. */
+  padding: 2.7rem;
+}
+.pr-list li a {
+  display: block;
+  padding: 2.7rem;
+  width: 100%;
+  height: 100%;
+  font-weight: 700;
+  font-size: 2.6rem;
+  color: #fff;
+}
+/* //e: pr room */
+
+/* s: management */
+.management {
+  background: #f3f3f3;
+  padding: 8rem 0 10rem;
+}
+
+.management-list {
+  background: #f00;
+  height: 36.8rem;
+}
+/* //e: management */
