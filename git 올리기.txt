@@ -1,0 +1,9 @@
+git add .
+git commit -m "siblings() 메서드 사용"
+git push -u origin main
+
+git log
+
+shift+q
+
+git show log
