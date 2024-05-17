@@ -1,5 +1,5 @@
 git add .
-git commit -m "siblings() 메서드 사용"
+git commit -m "반응형 css 완성"
 git push -u origin main
 
 git log

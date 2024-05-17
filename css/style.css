@@ -3,7 +3,7 @@
 .inner {
   width: 140rem;
   margin: 0 auto;
-  background: rgba(255, 255, 0, 0.3);
+  /* background: rgba(255, 255, 0, 0.3); */
 }
 
 .inner-wide {
@@ -21,7 +21,7 @@
 
 #header nav {
   height: 9.5rem;
-  background: #5f5;
+  /* background: #5f5; */
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
@@ -31,7 +31,7 @@
   display: block;
   width: 17rem;
   height: 2.4rem;
-  background: #000 url(../img/logo.svg) no-repeat 0 0 / contain;
+  background: url(../img/logo.svg) no-repeat 0 0 / contain;
 }
 
 .gnb {
@@ -42,7 +42,7 @@
 
 .gnb li a {
   display: block;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   padding: 1rem 2.5rem;
   font-weight: 600;
   color: #fff;
@@ -55,29 +55,42 @@
 .btn-lang {
   width: 5.5rem;
   height: 2.5rem;
-  background: #000 url(../img/ico-lang.svg) no-repeat 0 0 / contain;
+  background: url(../img/ico-lang.svg) no-repeat 0 0 / contain;
 }
 .btn-menu {
   width: 2.5rem;
   height: 2.5rem;
-  background: #f00 url(../img/ico-menu.svg) no-repeat 0 0 / contain;
+  background: url(../img/ico-menu.svg) no-repeat 0 0 / contain;
 }
 /* //e: header */
 
 /* s: visual */
 .visual {
   height: 108rem;
-  background: skyblue;
+  /* background: skyblue; */
   position: relative;
+  overflow: hidden;
 }
 
 .video {
-  width: 100%;
-  height: 100%; /* 부모한테 크기가 있다면 세로 크기 퍼센트로 나올 수 있다 */
-  border: 10px solid #000;
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.3);
+}
+.video::after {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.video iframe {
+  width: 100%;
+  height: 100%;
 }
 
 .visual .inner {
@@ -90,7 +103,9 @@
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  background: #55f;
+  /* background: #55f; */
+
+  width: 100%;
 }
 
 .visual-con h2 {
@@ -106,12 +121,40 @@
   font-weight: 600;
   font-size: 1.8rem;
   color: #fff;
+
+  position: absolute;
+  bottom: 2rem;
+  right: 0;
+
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.visual-con a::after {
+  content: '';
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  background: url(../img/ico-arr-w.svg) no-repeat 50% / cover;
+}
+
+.visual-con::after {
+  content: '';
+  display: block;
+  width: 80.7143%; /* (1130/1400)*100 */
+  height: 1px;
+  background: #fff;
+
+  position: absolute;
+  bottom: 12px;
+  right: 0;
 }
 /* //e: visual */
 
 /* sec-title */
 .sec-title {
-  background: khaki;
+  /* background: khaki; */
   font-weight: 700;
   color: var(--title-color);
 }
@@ -121,7 +164,7 @@
   display: flex;
   gap: 0.9rem;
   align-items: flex-end; /* aife */
-  background: #5f5;
+  /* background: #5f5; */
 }
 
 .sec-title h3::after {
@@ -148,11 +191,38 @@
   margin-top: 7rem;
 }
 .business-list li {
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   height: 37rem;
 
   /* fxgsb ->flex grow shrink basis */
   flex: 1 1 20%; /* fx1-1-20p */
+  transition: 0.3s;
+
+  background: no-repeat 0 0 / cover;
+}
+.business-list li:nth-child(1) {
+  background-image: url(../img/business-pic1.png);
+}
+.business-list li:nth-child(2) {
+  background-image: url(../img/business-pic2.png);
+}
+.business-list li:nth-child(3) {
+  background-image: url(../img/business-pic3.png);
+}
+.business-list li:nth-child(4) {
+  background-image: url(../img/business-pic4.png);
+}
+.business-list li:nth-child(5) {
+  background-image: url(../img/business-pic5.png);
+}
+
+/* hover */
+.business-list li:hover {
+  flex: 1 1 40%;
+}
+/* 호버되지 않은 나머지 값들은 15퍼씩 나눠 갖는다 */
+.business-list li:not(:hover) {
+  flex: 1 1 15%;
 }
 
 .business-list li a {
@@ -160,7 +230,7 @@
   flex-direction: column; /* fxdc */
   justify-content: flex-end; /* jcfe */
   align-items: center;
-  border: 1px solid #f00;
+  /* border: 1px solid #f00; */
   width: 100%;
   height: 100%;
   padding: 2.7rem;
@@ -184,7 +254,6 @@
   border: 1px solid #000;
   height: 50.2rem;
   flex: 1 1 30%; /* 이 방법으로 가로 크기를 정해줄 경우, 가로 크기에 대한 정의는 하면 안된다. */
-  padding: 2.7rem;
 }
 .pr-list li a {
   display: block;
@@ -219,6 +288,8 @@
   display: flex;
   flex-direction: column; /* fxdc */
   align-items: center;
+
+  text-align: center;
 }
 .heritage-con h4 {
   font-weight: 900;
@@ -234,7 +305,6 @@
 .heritage-con p {
   margin-top: 4rem;
   font-size: 2.4rem;
-  text-align: center;
 }
 .heritage-con a {
   font-weight: 600;
@@ -359,4 +429,258 @@
 }
 .sns-list > a.instagram {
   background-image: url(../img/ico-instagram.svg);
+}
+
+/* inner크기와 같은 분기점 생성 */
+@media (max-width: 1600px) {
+  .inner,
+  .inner-wide {
+    width: 924px;
+    width: 90.2344%; /* 924/1024*100=90.2344% */
+  }
+
+  .foot-menu {
+    gap: 7rem;
+  }
+}
+
+/* 태블릿 디자인 */
+@media (max-width: 1024px) {
+  /* .inner,
+  .inner-wide {
+    width: 924px;
+    width: 90.2344%;
+  } */
+  .visual-con::after {
+    width: 70.7792%; /* (654/924)*100 */
+  }
+
+  .business-list li a {
+    font-size: 1.8rem;
+  }
+  .pr-list li {
+    height: 33.2rem;
+  }
+  .heritage-con {
+    width: 71.4rem;
+    /* 714/924(inner)*100=77.2727 */
+    width: 77.2727%;
+    margin: 0 auto;
+  }
+  .heritage-con strong {
+    font-size: 3.2rem;
+  }
+  .heritage-con p {
+    font-size: 2.2rem;
+  }
+
+  .foot-links {
+    width: 82.4rem;
+    /* 824/924*100=89.17748 */
+    width: 89.1775%;
+    margin: 0 auto;
+  }
+  .foot-menu ul {
+    gap: 4.4rem;
+  }
+  .foot-menu ul li dl dt {
+    font-size: 1.8rem;
+  }
+  .foot-menu ul li dl dd {
+    font-size: 1.6rem;
+  }
+
+  .family-site {
+    width: 24rem;
+    height: 3rem;
+    font-size: 1.4rem;
+  }
+  .policy-list li a {
+    font-size: 1.4rem;
+  }
+}
+
+/* 문제가 발생하는 해상도를 위한 분기 */
+@media (max-width: 1000px) {
+  #header nav {
+    justify-content: space-between;
+  }
+  .gnb {
+    display: none;
+  }
+
+  .business-list {
+    flex-wrap: wrap; /* fxww */
+  }
+  .business-list li {
+    /* fx1-1-30p */
+    flex: 1 1 30%;
+  }
+
+  .foot-links {
+    flex-direction: column; /* fxdc */
+    align-items: center;
+    gap: 5rem;
+  }
+  .foot-family {
+    align-items: center;
+  }
+  .family-site {
+    margin-top: 4rem;
+  }
+  .sns-list {
+    order: -1; /* od : -1 <- 쌓이는 순서 달라짐 */
+    margin-top: 0;
+  }
+  .policy-list {
+    margin-top: 2.2rem;
+  }
+  .foot-copyright {
+    margin-top: 3.8rem;
+  }
+}
+
+/* 모바일 디자인 */
+@media (max-width: 700px) {
+  :root {
+    font-size: 80%;
+  }
+
+  .inner,
+  .inner-wide {
+    width: 350px;
+    /* 350/390*100=89.74358 */
+    width: 89.7436%;
+  }
+
+  #header nav {
+    height: 5.7rem;
+  }
+
+  .logo a {
+    width: 8.5rem;
+    height: 1.2rem;
+  }
+  .btn-lang {
+    width: 3.7rem;
+    height: 1.7rem;
+  }
+  .btn-menu {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .visual {
+    height: 54rem;
+  }
+  .visual-con h2 {
+    font-size: 3rem;
+  }
+  .visual-con a {
+    font-size: 1.3rem;
+  }
+
+  #container > section:not(.visual) {
+    /* container의 자식인 section 중 visual은 아닌 애 */
+    padding: 9rem 0;
+  }
+
+  .sec-title h3 {
+    font-size: 1.2rem;
+  }
+  .sec-title p {
+    font-size: 2.2rem;
+    margin-top: 2.3rem;
+  }
+
+  .business-list {
+    margin-top: 5rem;
+  }
+  .business-list li {
+    flex: 0 1 50%;
+    font: 21rem;
+  }
+  .business-list li a {
+    font-size: 1.5rem;
+  }
+
+  .pr-list {
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+  .pr-list li {
+    flex: 1 1 48%;
+    height: 19.2rem;
+  }
+  .pr-list li a {
+    font-size: 1.4rem;
+  }
+
+  .heritage-con {
+    width: 100%;
+  }
+  .heritage-con h4 {
+    font-size: 3rem;
+  }
+  .heritage-con strong {
+    font-size: 1.6rem;
+    margin-top: 3rem;
+  }
+  .heritage-con p {
+    font-size: 1.3rem;
+    margin-top: 3rem;
+  }
+  .heritage-con a {
+    /* background: #55f; */
+    font-size: 1.3rem;
+    width: 28.4rem;
+    /* 284/350*100=81.1429 */
+    width: 81.1429%;
+
+    height: 3.8rem;
+    border: 1px solid #000;
+    border-radius: 50px;
+    justify-content: center;
+    padding: 1rem 1rem;
+    margin-top: 4.6rem;
+
+    align-self: center; /* asc */
+    align-self: initial; /* initial: 초기화 */
+    /* align-self: unset;  */
+  }
+
+  #footer {
+    padding: 6.3rem 0 8rem;
+  }
+  .foot-menu {
+    display: none;
+  }
+  .foot-links {
+    width: 19.4rem;
+    /* 194/350*100=55.42857 */
+    width: 55.4286%;
+    display: block; /* flex 때문에 여백 생긴거라 블록 주면 해결 됨 */
+  }
+  .family-site {
+    width: 100%;
+    height: 3.5rem;
+    margin-top: 2rem;
+  }
+}
+
+/* 모바일 디자인 */
+@media (max-width: 500px) {
+  :root {
+    font-size: 62.5%;
+  }
+
+  .visual-con::after {
+    width: 62%;
+  }
+
+  .visual-con a {
+    bottom: -30px;
+    left: 0;
+    right: auto;
+  }
 }
