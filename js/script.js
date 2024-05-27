@@ -6,9 +6,9 @@ $(function () {
   const $submenu = $('.submenu-wrap');
   const $banner = $('.banner-slide');
   const $btnMenu = $('.btn-menu');
-  const duration = 200;
+  const duration = 300;
 
-  // Mobile GNB
+  // 모바일
   const $btnMmenu = $('.btn-m-menu');
   const $mSubmenu = $('.m-submenu-wrap');
   const $dim = $('.dim');
@@ -20,23 +20,22 @@ $(function () {
   $mGnbMenu.on('click', function () {
     $(this).toggleClass('on');
     $(this).siblings().removeClass('on');
-    $(this).find($mGnbSubmenu).stop().slideToggle();
-    $(this).siblings().find($mGnbMenu).stop().slideUp(duration);
+    $(this).find($mGnbSubmenu).stop().slideToggle(duration);
+    $(this).siblings().find($mGnbSubmenu).stop().slideUp(duration);
   });
 
-  // 모바일 메뉴 열기
   $btnMmenu.on('click', function () {
     $mSubmenu.addClass('active');
     $dim.fadeIn(duration);
   });
-  // 모바일 메뉴 닫기
+
   $btnClose.add($dim).on('click', function () {
     $mSubmenu.removeClass('active');
     $dim.fadeOut(duration);
 
     // 모바일 용 서브메뉴 초기화
     $mGnbMenu.removeClass('on');
-    $mGnbSubmenu.stop().slideUP(duration);
+    $mGnbSubmenu.stop().slideUp(duration);
   });
 
   // 마우스가 메뉴에 들어오면(mouseenter)
@@ -52,7 +51,6 @@ $(function () {
   $header.on('mouseleave', function () {
     $menu.removeClass('on');
     $submenu.find('li').removeClass('on');
-
     closeMenu();
   });
 
@@ -65,6 +63,7 @@ $(function () {
     $submenu.stop().fadeIn(duration);
     $banner.stop().fadeIn(duration);
   }
+
   function closeMenu() {
     $header.removeClass('active');
     $submenu.stop().fadeOut(duration);
@@ -72,7 +71,6 @@ $(function () {
   }
 
   let scrollTop = $window.scrollTop();
-  // 비주얼 영역의 세로크기 저장
   const visualHeight = $('.visual').outerHeight();
   setWhiteBackground();
 
@@ -90,17 +88,6 @@ $(function () {
     scrollTop = $(this).scrollTop();
     setWhiteBackground();
   });
-
-  // console.log(scrollTop, visualHeight);
-
-  // 두 값을 비교해서 (스크롤값이 비주얼 영역의 세로보다 크다면 = 비주얼 영역을 지난다.)
-  if (scrollTop >= visualHeight) {
-    // w-bg클래스를 더해줌
-    $header.addClass('w-bg');
-  } else {
-    // 작으면 w-bg클래스를 제거함
-    $header.removeClass('w-bg');
-  }
 
   // 언어 선택
   $('.btn-lang').on('click', function () {
