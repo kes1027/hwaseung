@@ -1,5 +1,6 @@
 @charset 'utf-8';
 
+/* Inner */
 .inner {
   width: 140rem;
   margin: 0 auto;
@@ -11,46 +12,112 @@
   width: 160rem;
 }
 
-/* s: header */
+/* Header */
 #header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 10;
+
+  transition: 0.4s;
+}
+#header::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  top: 9.5rem;
+  left: 0;
+  height: 0.1rem;
+  background: #f1f1f1;
+
+  opacity: 0;
+  transition: 0.4s;
+}
+#header.active::before {
+  opacity: 1;
+  z-index: 1;
 }
 
 #header::after {
   content: '';
-  background: #00f;
+  background: #fff;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 400px;
+  height: 40rem;
+  /* z-index: 5; */
+
+  transform: translateY(-100%);
+  transition: 0.4s;
 }
 
-/* * : 모든 것 */
+#header.active::after {
+  transform: translateY(0%);
+}
+
+#header.w-bg {
+  background: rgba(255, 255, 255, 0.8);
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(5px);
+}
+
+#header.w-bg .logo a,
+#header.active .logo a {
+  background-image: url(../img/logo_blue_01.png);
+}
+
+#header.w-bg .gnb li a,
+#header.active .gnb li a {
+  color: #000;
+}
+
+#header.w-bg .btn-lang,
+#header.active .btn-lang {
+  background-image: url(../img/btn_language_black_01.png);
+}
+
+#header.w-bg .btn-lang::after,
+#header.active .btn-lang::after {
+  border-top-color: #000 /* bdtc */;
+}
+
+#header.w-bg .btn-m-menu,
+#header.w-bg .btn-menu,
+#header.active .btn-menu {
+  background-image: url(../img/ico-menu-b.svg);
+}
+
 #header nav > * {
   z-index: 1;
 }
-
 .submenu-wrap {
   position: absolute;
   top: 13.5rem;
   left: 15rem;
   /* background: #5f5; */
   z-index: 1;
+
+  display: none;
 }
+
 .submenu-wrap ul {
   display: flex;
   gap: 6rem;
 }
+
 .submenu-wrap ul li dl dt {
-  font-weight: 600;
   font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--title-color);
+}
+
+.submenu-wrap ul li.on dl dt {
   color: var(--main-color);
 }
+
 .submenu-wrap ul li dl dd {
   font-size: 1.8rem;
   line-height: 1.78;
@@ -62,22 +129,23 @@
 .submenu-wrap ul li dl dd a {
   display: flex;
   align-items: center;
-  /* border: 1px solid #000; */
+  /* border: 1px solid #fff; */
 }
 .submenu-wrap ul li dl dd a::before {
   content: '';
   display: block;
-  width: 7px;
-  height: 7px;
+  width: 0.7rem;
+  height: 0.7rem;
   border-radius: 50%;
   background: var(--main-color);
-  transform: translateX(0px); /* trftx */
+
+  transform: translateX(-0.2rem);
   opacity: 0;
   transition: 0.3s;
 }
-.submenu-wrap ul li dl dd a:hover:before {
+.submenu-wrap ul li dl dd a:hover::before {
+  transform: translateX(-1.2rem);
   opacity: 1;
-  transform: translateX(-16px);
 }
 
 .banner-slide {
@@ -85,9 +153,12 @@
   top: 13.5rem;
   right: 15rem;
   background: #5f5;
-  z-index: 1;
+
   width: 41.3rem;
   height: 20.5rem;
+  z-index: 1;
+
+  display: none;
 }
 
 #header nav {
@@ -102,18 +173,20 @@
   display: block;
   width: 17rem;
   height: 2.4rem;
+  /* background: #000; */
+
   background: url(../img/logo.svg) no-repeat 0 0 / contain;
 }
-
 .gnb {
   display: flex;
-  margin-right: auto; /* mra */
+  margin-right: auto;
   margin-left: 6.5rem;
 }
 .gnb li a {
   display: block;
   /* border: 1px solid #000; */
   padding: 0 2.5rem;
+
   font-weight: 600;
   color: #fff;
   height: 9.5rem;
@@ -122,6 +195,7 @@
   display: flex;
   align-items: center;
   height: 100%;
+
   /* border: 1px solid #ff0; */
   position: relative;
 }
@@ -129,77 +203,212 @@
   content: '';
   position: absolute;
   bottom: 0;
-
   left: 50%;
-  transform: translateX(-50%);
-
   width: 0%;
-  height: 2px;
-  transition: 0.3s;
-  background: #f00;
+  height: 3px;
+  background: var(--main-color);
   /* background: var(--main-color); */
+  transition: 0.4s;
+  transform: translateX(-50%);
 }
-.gnb li a:hover b::after {
+.gnb li.on a b::after {
   width: 100%;
 }
 
 .util {
   display: flex;
+  gap: 1rem;
+  position: relative;
 }
 
 .btn-lang {
-  width: 5.5rem;
+  width: 4.4rem;
   height: 2.5rem;
-  background: url(../img/ico-lang.svg) no-repeat 0 0 / contain;
+  background: url(../img/btn_language_white_01.png) no-repeat 0 0 / contain;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
+
+.btn-lang::after {
+  content: '';
+  display: block;
+  /* width: 4px;
+  height: 4px;
+  background: #ff0; */
+
+  /* 삼각형 그리기 */
+  border: 4px solid transparent;
+  border-top-color: #fff;
+}
+
+.lang-select {
+  position: absolute;
+  top: 36px;
+  left: 4px;
+  background: #fff;
+  padding: 10px;
+  height: 3.6rem; /* 세로 크기 고정 */
+  display: none;
+}
+
+.lang-select::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-bottom-color: #fff;
+}
+
+.lang-select a {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--title-color);
+  text-decoration: underline; /* tdu */
+}
+
 .btn-menu {
   width: 2.5rem;
   height: 2.5rem;
   background: url(../img/ico-menu.svg) no-repeat 0 0 / contain;
 }
-/* //e: header */
+.btn-m-menu {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: url(../img/ico-menu.svg) no-repeat 0 0 / contain;
+  display: none;
+}
 
-/* s: visual */
+/* 모바일용 전체 메뉴 */
+.dim {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 99;
+  display: none;
+}
+
+.m-submenu-wrap {
+  position: fixed;
+  top: 0;
+  right: 0;
+  /* width: 90%; */
+  width: 80%;
+  background: #fff;
+  z-index: 100;
+  height: 100vh; /* 뷰포트의 세로크기 전체 */
+  padding: 3rem 11.29%;
+
+  transform: translateX(100%);
+  transition: 0.3s;
+}
+
+.m-submenu-wrap.active {
+  transform: translateX(0%);
+}
+
+.m-gnb {
+  background: #ff5;
+}
+
+.m-gnb > li {
+  border: 1px solid #000;
+  padding: 1.5rem 0;
+}
+
+.m-gnb > li > strong {
+  display: block;
+  font-weight: 700;
+  font-size: 2.1rem;
+  color: var(--title-color);
+  padding: 1rem 0;
+  transition: 0.4s;
+  background: tomato;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.m-gnb > li.on > strong {
+  background: skyblue;
+}
+
+.m-gnb > li > strong::after {
+  content: '';
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1px solid #000;
+  /* bdw1-1-0-0 */
+  border-width: 2px 2px 0 0;
+  transform: rotate(135deg);
+  transition: 0.3s;
+}
+
+.m-gnb > li.on > strong::after {
+  transform: rotate(315deg);
+}
+
+.m-gnb-sub {
+  margin-left: 4rem;
+  display: none;
+}
+
+.m-gnb-sub li a {
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+
+/* Section 001 : visual | 비주얼영역 */
 .visual {
   height: 108rem;
   /* background: skyblue; */
   position: relative;
   overflow: hidden;
 }
+.visual .inner {
+  position: relative;
+  height: 100%;
+}
 
 .video {
-  width: 1920px;
-  height: 1080px;
+  /* visual은 video의 틀로서 작동함. 영상의 크기는 1920*1080의 크기이고 보여지는 캔버스의 크기가 늘어나 줄어든다 할지라도 영상 자체의 크기가 줄거나 하지 않음 */
+  /* width 100%, height 100%로 비디오 크기를 주면, 줄어든 캔버스의 크기에 따라 영상의 크기도 같이 줄어듬 */
+  width: 192rem;
+  height: 108rem;
+
+  /* border: 1rem solid #000; */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1.3);
 }
 .video::after {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
 }
+
 .video iframe {
   width: 100%;
   height: 100%;
 }
-
-.visual .inner {
-  position: relative;
-  height: 100%;
-}
-
 .visual-con {
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
   /* background: #55f; */
-
   width: 100%;
 }
 
@@ -207,9 +416,24 @@
   font-weight: 700;
   font-size: 7rem;
   color: #fff;
-  /* 85(줄간격수치)/70(폰트사이즈)=1.2142 */
   line-height: 1.2142;
-  letter-spacing: -0.25px; /* lts-.25px */
+  letter-spacing: -0.25px;
+}
+
+.visual-con h2 b {
+  /* border: 1px solid #ff0; */
+  position: relative;
+}
+.visual-con h2 b::after {
+  content: '';
+  display: block;
+  width: 1870%; /* 1920 기준 줄 길이, 검사기로 파악 */
+  height: 1px;
+  background: #fff;
+
+  position: absolute;
+  bottom: 1.2rem;
+  left: 16px;
 }
 
 .visual-con a {
@@ -224,6 +448,8 @@
   display: flex;
   gap: 1.5rem;
   align-items: center;
+
+  /* background: #5f5; */
 }
 
 .visual-con a::after {
@@ -234,53 +460,38 @@
   background: url(../img/ico-arr-w.svg) no-repeat 50% / cover;
 }
 
-.visual-con::after {
-  content: '';
-  display: block;
-  width: 80.7143%; /* (1130/1400)*100 */
-  height: 1px;
-  background: #fff;
-
-  position: absolute;
-  bottom: 12px;
-  right: 0;
-}
-/* //e: visual */
-
-/* sec-title */
 .sec-title {
   /* background: khaki; */
   font-weight: 700;
   color: var(--title-color);
 }
-
 .sec-title h3 {
   font-size: 2.4rem;
-  display: flex;
-  gap: 0.9rem;
-  align-items: flex-end; /* aife */
-  /* background: #5f5; */
-}
 
+  display: flex;
+  /* background: #ff5; */
+  gap: 0.9rem;
+  align-items: flex-end;
+}
 .sec-title h3::after {
   content: '';
   display: block;
   width: 13rem;
   height: 1px;
-  background: #9c9c9c;
+  /* background: #9c9c9c; */
   margin-bottom: 0.5rem;
 }
-
 .sec-title p {
   font-size: 4.8rem;
   line-height: 1.4;
   margin-top: 4.5rem;
 }
 
-/* s: business */
+/* Section 002 : business | 사업 분야 */
 .business {
   padding: 17rem 0 9rem;
 }
+
 .business-list {
   display: flex;
   margin-top: 7rem;
@@ -288,34 +499,29 @@
 .business-list li {
   /* border: 1px solid #000; */
   height: 37rem;
-
-  /* fxgsb ->flex grow shrink basis */
-  flex: 1 1 20%; /* fx1-1-20p */
-  transition: 0.3s;
-
+  flex: 1 1 20%;
   background: no-repeat 0 0 / cover;
+  transition: 0.4s;
 
-  /* detail-info의 기준점과 설정 */
   position: relative;
   overflow: hidden;
 }
+
 .business-list li:nth-child(1) {
-  background-image: url(../img/business-pic1.png);
+  background-image: url(https://www.hwaseunggroup.com/kor/assets/img/main/busi_con01.png);
 }
 .business-list li:nth-child(2) {
-  background-image: url(../img/business-pic2.png);
+  background-image: url(https://www.hwaseunggroup.com/kor/assets/img/main/busi_con02.png);
 }
 .business-list li:nth-child(3) {
-  background-image: url(../img/business-pic3.png);
+  background-image: url(https://www.hwaseunggroup.com/kor/assets/img/main/busi_con03.png);
 }
 .business-list li:nth-child(4) {
-  background-image: url(../img/business-pic4.png);
+  background-image: url(https://www.hwaseunggroup.com/kor/assets/img/main/busi_con04.png);
 }
 .business-list li:nth-child(5) {
-  background-image: url(../img/business-pic5.png);
+  background-image: url(https://www.hwaseunggroup.com/kor/assets/img/main/busi_con05.png);
 }
-
-/* dim 처리 */
 .business-list li::before {
   content: '';
   display: block;
@@ -324,35 +530,46 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* background: rgba(0, 0, 0, 0.5); */
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 
+  background: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   opacity: 0;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 /* hover */
 .business-list li:hover {
-  flex: 1 1 28%;
+  flex: 1 1 30%;
 }
-/* 호버되지 않은 나머지 값들은 15퍼씩 나눠 갖는다 */
+
 .business-list li:not(:hover) {
-  flex: 1 1 15%;
+  flex: 1 1 17.5%;
 }
-/* dim 처리 */
+
 .business-list li:hover::before {
   opacity: 1;
 }
 
+.business-list li:hover .detail-info {
+  bottom: 0;
+  opacity: 1;
+  transition: 0.4s 0.2s;
+}
+
+.business-list li:hover span {
+  opacity: 0;
+}
+
 .business-list li a {
   display: flex;
-  flex-direction: column; /* fxdc */
-  justify-content: flex-end; /* jcfe */
-  align-items: center;
   /* border: 1px solid #f00; */
   width: 100%;
   height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
   padding: 2.7rem;
+
   font-weight: 600;
   font-size: 2.6rem;
   color: #fff;
@@ -363,37 +580,27 @@
   position: absolute;
   left: 0;
   width: 100%;
+
   padding: 2.7rem;
 
-  /* transition 되기 전 조치 */
-  bottom: -50px; /* transition 효과를 위해 50 밑으로 */
+  bottom: -150px;
   opacity: 0;
 }
+
 .detail-info dt {
   font-weight: 600;
 }
+
 .detail-info dd {
   font-weight: 200;
   font-size: 1.5rem;
   margin-top: 1.8rem;
 }
 
-/* hover 효과 */
-.business-list li:hover .detail-info {
-  bottom: 0;
-  opacity: 1;
-  transition: 0.3s 0.4s;
-}
-.business-list li:hover span {
-  opacity: 0;
-}
-/* //e: business */
-
-/* s: pr room */
+/* Section 003 : pr | PR Room */
 .pr {
   padding: 8rem 0 10rem;
 }
-
 .pr-list {
   display: flex;
   gap: 2rem;
@@ -402,12 +609,11 @@
 .pr-list li {
   /* border: 1px solid #000; */
   height: 50.2rem;
-  flex: 1 1 30%; /* 이 방법으로 가로 크기를 정해줄 경우, 가로 크기에 대한 정의는 하면 안된다. */
+  flex: 1 1 30%;
 
-  background: no-repeat 0 0 / cover;
+  background: no-repeat 50% / cover;
   position: relative;
 }
-
 .pr-list li:nth-child(1) {
   background-image: url(../img/pr-pic1.png);
 }
@@ -427,9 +633,9 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.3);
   opacity: 0;
-  transition: 0.3s;
+  transition: 0.4s;
 }
-
+/* hover */
 .pr-list li:hover::before {
   opacity: 1;
 }
@@ -439,35 +645,35 @@
   padding: 2.7rem;
   width: 100%;
   height: 100%;
+  /* background: pink; */
   font-weight: 700;
   font-size: 2.6rem;
   color: #fff;
 
   position: relative;
+  z-index: 1;
 }
-/* //e: pr room */
 
-/* s: management */
+/* Section 004 : management | 지속가능경영 */
 .management {
   background: #f3f3f3;
   padding: 8rem 0 10rem;
 }
-
 .management-list {
-  background: #f00;
+  background: tomato;
   height: 36.8rem;
 }
-/* //e: management */
 
-/* s: heritage */
+/* Section 005 : heritage | Heritage of Hwaseung */
 .heritage {
-  padding: 18rem 0 19.2rem;
+  padding: 18rem 0 19rem;
 }
+
 .heritage-con {
   /* background: #5f5; */
 
   display: flex;
-  flex-direction: column; /* fxdc */
+  flex-direction: column;
   align-items: center;
 
   text-align: center;
@@ -486,7 +692,6 @@
 .heritage-con p {
   margin-top: 4rem;
   font-size: 2.4rem;
-  color: #333;
 }
 .heritage-con a {
   font-weight: 600;
@@ -494,24 +699,23 @@
   color: var(--title-color);
   margin-top: 8.2rem;
 
-  align-self: flex-end; /* asfe : 교차축 방향으로 아이템을 개별 배치 */
-
+  /* 교차축 방향으로 아이템을 개별 배치  */
+  align-self: flex-end;
   display: flex;
-  gap: 1.2rem;
   align-items: center;
+  gap: 1.2rem;
 }
 .heritage-con a::after {
   content: '';
   display: block;
   width: 1.2rem;
   height: 1.2rem;
-  background: url(../img/ico-arr.png) no-repeat 50%;
+  background: url(../img/ico-arr.svg) no-repeat 100% 0;
 }
-/*  //e: heritage */
 
 #footer {
   padding: 11.6rem 0 13.3rem;
-  background: #000 url(https://www.hwaseunggroup.com/kor/assets/img/common/footer_bg_.png) no-repeat 0 0 / cover fixed;
+  background: url(https://www.hwaseunggroup.com/kor/assets/img/common/footer_bg_.png) no-repeat 0 0 / cover fixed;
 }
 .foot-links {
   /* border: 1px solid #f00; */
@@ -523,6 +727,7 @@
   display: flex;
   gap: 14rem;
 }
+
 .foot-menu ul li dl dt {
   font-weight: 600;
   font-size: 2.2rem;
@@ -537,21 +742,20 @@
 .foot-menu ul li dl dd:first-of-type {
   margin-top: 3.6rem;
 }
-
 .foot-family {
   /* background: #55f; */
   display: flex;
-  flex-direction: column; /* fxdc */
+  flex-direction: column;
   align-items: flex-end; /* aife */
 }
 .family-site {
   border: 1px solid #fff;
   width: 28.6rem;
   height: 5rem;
-
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  /* appearance: none; */
 }
 .family-site select {
   background: transparent;
@@ -559,6 +763,7 @@
   appearance: none;
   padding: 0 1.5rem;
   flex: 1 1 auto;
+  outline: none;
 }
 .family-site select option {
   background: #333;
@@ -566,30 +771,26 @@
 .family-site::after {
   content: '';
   display: block;
-  /* background: #f00; */
   width: 1.2rem;
   height: 1.2rem;
+  /* background: #f00; */
 }
-
 .foot-copyright {
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
-  /* mt7r+pt3.2r+tac+fw200+fz1.4r+c#fff */
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 200;
   margin-top: 7rem;
   padding-top: 3.2rem;
   text-align: center;
-  font-weight: 200;
   font-size: 1.4rem;
   color: #fff;
 }
 
 .policy-list {
-  /* mt3r+df+g2r */
   margin-top: 3rem;
   display: flex;
   gap: 2rem;
 }
 .policy-list li a {
-  /* fw500+fz1.6r+c#fff */
   font-weight: 500;
   font-size: 1.6rem;
   color: #fff;
@@ -602,17 +803,17 @@
   display: block;
   width: 3.6rem;
   height: 3.6rem;
-  background: #909ca3 no-repeat 50%;
+  background: no-repeat 50%;
 }
 .sns-list > a.instagram {
   background-image: url(../img/ico-instagram.svg);
 }
 
-/* inner 크기와 같은 분기점 생성 */
+/* .inner 크기와 같은 분기점 생성 */
 @media (max-width: 1600px) {
   .inner,
   .inner-wide {
-    /* width: 924px; */
+    width: 92.4rem;
     width: 90.2344%;
   }
 
@@ -625,20 +826,26 @@
 @media (max-width: 1024px) {
   /* .inner,
   .inner-wide {
-    width: 924px;
+    width: 92.4rem;
     width: 90.2344%;
   } */
 
+  /*  Section 001 : visual | 비주얼영역  */
   .visual-con::after {
-    width: 70.7792%; /* (654 / 924) * 100 */
+    width: 70.7792%;
   }
 
+  /* Section 002 : business | 사업 분야 */
   .business-list li a {
     font-size: 1.8rem;
   }
+
+  /* Section 003 : pr | PR Room */
   .pr-list li {
     height: 33.2rem;
   }
+
+  /* Section 005 : heritage | Heritage of Hwaseung */
   .heritage-con {
     width: 71.4rem;
     width: 77.2727%;
@@ -650,6 +857,8 @@
   .heritage-con p {
     font-size: 2.2rem;
   }
+
+  /* footer */
   .foot-links {
     width: 82.4rem;
     width: 89.1775%;
@@ -666,26 +875,29 @@
   .foot-menu ul li dl dd {
     font-size: 1.6rem;
   }
-
   .family-site {
     width: 24rem;
     height: 3rem;
     font-size: 1.4rem;
   }
-
   .policy-list li a {
     font-size: 1.4rem;
   }
 }
 
-/*  문제가 발생하는 해상도를 위한 분기 */
+/* 문제가 발생하는 해상도를 위한 분기 */
 @media (max-width: 1000px) {
   #header nav {
     justify-content: space-between;
   }
-
   .gnb {
     display: none;
+  }
+  .btn-menu {
+    display: none;
+  }
+  .btn-m-menu {
+    display: block;
   }
 
   .business-list {
@@ -698,18 +910,21 @@
   .foot-links {
     flex-direction: column;
     align-items: center;
+
     gap: 5rem;
   }
 
   .foot-family {
     align-items: center;
   }
+
+  .sns-list {
+    order: -1;
+    margin-top: 0;
+  }
+
   .family-site {
     margin-top: 4rem;
-  }
-  .sns-list {
-    order: -1; /* od */
-    margin-top: 0;
   }
 
   .policy-list {
@@ -720,18 +935,19 @@
     margin-top: 3.8rem;
   }
 }
-
-/* 모바일 디자인 */
+/*모바일 디자인 */
 @media (max-width: 700px) {
   :root {
     font-size: 90%;
   }
+
   .inner,
   .inner-wide {
-    /* width: 350px; */
+    width: 350px;
     width: 89.7436%;
   }
 
+  /* header */
   #header nav {
     height: 5.7rem;
   }
@@ -741,47 +957,54 @@
     height: 1.2rem;
   }
 
-  .btn-lang {
+  .util .btn-lang {
     width: 3.7rem;
     height: 1.7rem;
   }
 
-  .btn-menu {
+  .util .btn-m-menu,
+  .util .btn-menu {
     width: 1.7rem;
     height: 1.7rem;
   }
 
+  /* Section 001 : visual | 비주얼영역 */
   .visual {
     height: 54rem;
   }
-
   .visual-con h2 {
     font-size: 3rem;
   }
   .visual-con a {
     font-size: 1.3rem;
+    /* display: inline-block; */
+    margin-top: 1.65rem;
   }
 
+  /* common */
   #container > section:not(.visual) {
     padding: 9rem 0;
   }
-
   .sec-title h3 {
     font-size: 1.2rem;
   }
   .sec-title p {
     font-size: 2.2rem;
+    margin-top: 2.3rem;
   }
 
+  /* Section 002 : business | 사업 분야 */
+  .business-list {
+    margin-top: 5rem;
+  }
   .business-list li {
     flex: 0 1 50%;
     height: 21rem;
   }
-
   .business-list li a {
     font-size: 1.5rem;
   }
-
+  /* Section 003 : pr | PR Room */
   .pr-list {
     flex-wrap: wrap;
     gap: 1.2rem;
@@ -793,19 +1016,20 @@
   .pr-list li a {
     font-size: 1.4rem;
   }
-
+  /* Section 005 : heritage | Heritage of Hwaseung */
   .heritage-con {
     width: 100%;
   }
-
   .heritage-con h4 {
     font-size: 3rem;
   }
   .heritage-con strong {
     font-size: 1.6rem;
+    margin-top: 3rem;
   }
   .heritage-con p {
     font-size: 1.3rem;
+    margin-top: 3rem;
   }
   .heritage-con a {
     /* background: #55f; */
@@ -815,13 +1039,17 @@
 
     height: 3.8rem;
     border: 1px solid #000;
-    border-radius: 50px;
+    border-radius: 5rem;
     justify-content: center;
-    align-self: center; /* asc */
-    align-self: initial;
+    padding: 1rem 1rem;
+
+    align-self: initial; /* 초기화 */
     /* align-self: unset; */
+
+    margin-top: 4.6rem;
   }
 
+  /* footer */
   #footer {
     padding: 6.3rem 0 8rem;
   }
@@ -831,7 +1059,6 @@
   .foot-links {
     width: 19.4rem;
     width: 55.4286%;
-
     display: block;
   }
   .family-site {
@@ -845,9 +1072,11 @@
   :root {
     font-size: 62.5%;
   }
+
   .visual-con::after {
     width: 62%;
   }
+
   .visual-con a {
     bottom: -30px;
     left: 0;

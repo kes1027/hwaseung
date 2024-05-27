@@ -1,9 +1,0 @@
-git add .
-git commit -m "반응형 css 완성"
-git push -u origin main
-
-git log
-
-shift+q
-
-git show log

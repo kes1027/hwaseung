@@ -1,8 +1,9 @@
 @charset 'utf-8';
+
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 
 :root {
-  font-size: 62.5%; /* 1rem = 10px */
+  font-size: 62.5%; /* 10px */
   --main-color: #0b56a7;
   --title-color: #111;
   --text-color: #333;
@@ -12,7 +13,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
 a:hover {
   text-decoration: none;
   color: var(--main-color);
@@ -27,7 +27,6 @@ hr,
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
 }
-
 body {
   font: 2rem 'Pretendard', sans-serif;
 }
