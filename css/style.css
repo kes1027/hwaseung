@@ -312,12 +312,12 @@
   transform: translateX(0%);
 }
 
-.m-gnb {
+/* .m-gnb {
   background: #ff5;
-}
+} */
 
 .m-gnb > li {
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   padding: 1.5rem 0;
 }
 
@@ -328,22 +328,22 @@
   color: var(--title-color);
   padding: 1rem 0;
   transition: 0.4s;
-  background: tomato;
+  /* background: tomato; */
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.m-gnb > li.on > strong {
+/* .m-gnb > li.on > strong {
   background: skyblue;
-}
+} */
 
 .m-gnb > li > strong::after {
   content: '';
   display: block;
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 0.7rem;
+  height: 0.7rem;
   border: 1px solid #000;
   /* bdw1-1-0-0 */
   border-width: 2px 2px 0 0;
@@ -362,7 +362,16 @@
 
 .m-gnb-sub li a {
   font-size: 1.8rem;
-  line-height: 1.5;
+  line-height: 2.5;
+  color: #555;
+  /* padding: 4px 0 4px 20px; */
+}
+.btn-close {
+  display: block;
+  margin-left: auto;
+  width: 2rem;
+  height: 2rem;
+  background: url(../img/btn-close.svg) no-repeat 0 0 / cover;
 }
 
 /* Section 001 : visual | 비주얼영역 */
@@ -396,7 +405,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .video iframe {
@@ -540,10 +549,6 @@
 /* hover */
 .business-list li:hover {
   flex: 1 1 30%;
-}
-
-.business-list li:not(:hover) {
-  flex: 1 1 17.5%;
 }
 
 .business-list li:hover::before {
@@ -813,17 +818,38 @@
 @media (max-width: 1600px) {
   .inner,
   .inner-wide {
-    width: 92.4rem;
+    /* width: 92.4rem; */
     width: 90.2344%;
   }
-
+  .submenu-wrap {
+    left: 9.375%;
+  }
+  .banner-slide {
+    right: 9.375%;
+  }
   .foot-menu ul {
     gap: 7rem;
   }
 }
 
+@media (max-width: 1300px) {
+  .submenu-wrap {
+    left: 3%;
+  }
+  .banner-slide {
+    right: 3%;
+  }
+  /* header sub menu 글씨 조정 */
+  .submenu-wrap ul li dl dt {
+    font-size: 1.8rem;
+  }
+  .submenu-wrap ul li dl dd {
+    font-size: 1.6rem;
+  }
+}
+
 /* 태블릿 디자인 */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   /* .inner,
   .inner-wide {
     width: 92.4rem;
@@ -972,9 +998,20 @@
   .visual {
     height: 54rem;
   }
+
   .visual-con h2 {
     font-size: 3rem;
   }
+
+  .visual-con h2 b {
+    position: initial;
+  }
+
+  .visual-con h2 b::after {
+    left: 0;
+    bottom: -7px;
+  }
+
   .visual-con a {
     font-size: 1.3rem;
     /* display: inline-block; */
