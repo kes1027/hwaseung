@@ -83,7 +83,10 @@ $(function () {
     }
   }
 
-  $window.on('resize', setWhiteBackground);
+  $window.on('resize', function () {
+    setWhiteBackground();
+    setManagementHeight();
+  });
 
   // 스크롤 이벤트
   $window.on('scroll', function () {
@@ -136,7 +139,7 @@ $(function () {
 
     on: {
       autoplayTimeLeft(swiper, timeLeft, percentage) {
-        console.log(timeLeft, percentage);
+        // console.log(timeLeft, percentage);
         //timeLeft: 남은 시간 (ms)
         //percentage: 진행 상태를 1~0사이의 값으로 표현
         const percentageValue = (1 - percentage) * 100 + '%';
@@ -160,4 +163,16 @@ $(function () {
     $btnPlay.hide();
     $btnPause.show();
   });
+
+  // 지속가능영역의 세로 크기 결정
+  setManagementHeigjt();
+
+  function setManagementHeigjt() {
+    const titleHeight = $('.management .sec-title').outerHeight();
+    const sliderHeight = $('.management-list-wrap').outerHeight();
+    const managementHeight = titleHeight + sliderHeight;
+    $('.management').css({
+      height: `calc(${managementHeight}px + 12vw)`,
+    });
+  }
 });
