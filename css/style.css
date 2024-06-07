@@ -817,6 +817,51 @@ body {
   background: #039;
 }
 
+/* 원으로 진행률 표시 */
+/* .autoplay-progress {
+  position: absolute;
+  left: 50%;
+  bottom: -100px;
+  z-index: 10;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #039;
+  // border: 2px solid #000; 
+  border-radius: 50%;
+}
+
+.autoplay-progress::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 2px;
+  stroke: #039;
+  fill: none;
+  stroke-dasharray: 615.75164;
+  // 2파이r = 2*3.14159*98 
+  stroke-dashoffset: calc(615.75164px * (1 - var(--progress)));
+  transform: rotate(-90deg);
+} */
+/* 원으로 진행률 표시 */
+
 .heritage {
   padding: 18rem 0 19.2rem;
 }
@@ -1056,6 +1101,14 @@ body {
     height: 98px;
   }
 
+  .management-list-wrap .management-list .swiper-slide .badge {
+    width: 140px;
+    font-size: 1.8rem;
+    /* 140/1024*100=가로의 크기값 : 13.6719% */
+    /* width: 13.6719%;
+    font-size: 1.7578vw; */
+  }
+
   .progress {
     bottom: -10px;
     width: 77.03%; /* 778/1024*100 */
@@ -1157,11 +1210,22 @@ body {
 
 /* 지속가능영역 슬라이더 위치 조정 */
 @media (max-width: 850px) {
-  /* .management {
-    height: 140vw;
-  } */
   .management-list-wrap {
     transform: translate(-50%, 0);
+  }
+  .management-list-wrap .management-list .swiper-slide .badge {
+    /* width: 140px; */
+    /* font-size: 18px; */
+    width: clamp(120px, 16.4706%, 140px);
+    /* 최소120~최대 140pxl, 나머지에선 비율로 돌아감 */
+    /* 140/850*100=16.47058 */
+    font-size: (1.2rem, 2.118vw, 1.6rem);
+    /* 18px/850*100=2.118 */
+  }
+
+  .management-list-wrap .btn-wrap button {
+    width: 80px;
+    height: 80px;
   }
 
   .pagination-wrap {
@@ -1251,6 +1315,11 @@ body {
   }
   .pr-list li a {
     font-size: 1.4rem;
+  }
+
+  .management-list-wrap .btn-wrap button {
+    width: 60px;
+    height: 60px;
   }
 
   .heritage-con {
